@@ -28,13 +28,13 @@ public class Main extends Application {
         Pane root = new Pane();
         Scene scene = new Scene(root, 800, 800);
 
-        Image bgImage = new Image("background.png");
+        Image bgImage = new Image(getClass().getResource("/resource/background.png").toExternalForm());
         ImageView background = new ImageView(bgImage);
         background.setFitWidth(800);
         background.setFitHeight(800);
         root.getChildren().add(background);
 
-        Image birdImage = new Image("bird.png");
+        Image birdImage = new Image(getClass().getResource("/resource/bird.png").toExternalForm());
         bird = new ImageView(birdImage);
         bird.setFitWidth(40);
         bird.setFitHeight(40);
@@ -47,7 +47,8 @@ public class Main extends Application {
 
             @Override
             public void handle(long now) {
-                if (gameOver) return;
+                if (gameOver)
+                    return;
 
                 velocity += gravity;
                 bird.setY(bird.getY() + velocity);
@@ -82,10 +83,12 @@ public class Main extends Application {
         scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case SPACE:
-                    if (!gameOver) velocity = jumpStrength;
+                    if (!gameOver)
+                        velocity = jumpStrength;
                     break;
                 case R:
-                    if (gameOver) restartGame(root, background);
+                    if (gameOver)
+                        restartGame(root, background);
                     break;
             }
         });
@@ -96,7 +99,7 @@ public class Main extends Application {
     }
 
     private void addPipes(Pane root) {
-        Image pipeImage = new Image("pipe.png");
+        Image pipeImage = new Image(getClass().getResource("/resource/pipe.png").toExternalForm());
         double centerY = 100 + Math.random() * 300;
 
         ImageView topPipe = new ImageView(pipeImage);
@@ -112,8 +115,6 @@ public class Main extends Application {
         bottomPipe.setFitHeight(800 - (centerY + pipeGap / 2));
         bottomPipe.setX(800);
         bottomPipe.setY(centerY + pipeGap / 2);
-        
-    
 
         pipes.add(topPipe);
         pipes.add(bottomPipe);
